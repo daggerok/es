@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
 <meta name="author" content="Maksim Kostromin">
-<title>es (0.0.1)</title>
+<title>es (1.0.0-SNAPSHOT)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -463,43 +463,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>es (0.0.1) <span class="image"><a class="image" href="https://github.com/daggerok/es"><img src="https://travis-ci.org/daggerok/es.svg?branch=master" alt="Build Status"></a></span></h1>
+<h1>es (1.0.0-SNAPSHOT) <span class="image"><a class="image" href="https://github.com/daggerok/es"><img src="https://travis-ci.org/daggerok/es.svg?branch=master" alt="Build Status"></a></span></h1>
 <div class="details">
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
-<span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2018-12-07 12:32:16 UTC</span>
+<span id="revnumber">version 1.0.0-SNAPSHOT,</span>
+<span id="revdate">2018-12-07 22:45:22 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#implementation">Implementation</a></li>
+<li><a href="#es-system">es system</a></li>
 <li><a href="#links">Links</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="title">build</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw clean package docker-compose:up -P docker
-./mvnw docker-compose:down -P docker
-
-./gradlew clean build composeUp
-./gradlew composeDown</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="implementation"><a class="anchor" href="#implementation"></a>Implementation</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>TODO: implement documentation&#8230;&#8203;</p>
+<p>Read <a href="https://daggerok.github.io/es">project reference documentation</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="es-system"><a class="anchor" href="#es-system"></a>es system</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre> +-----+
+ |  e  |
+ |  s  |
+ |     |                      +-------------+       messaging     +-------------------+
+ |  e  |      messaging       | es commands |-+    &lt;----------    | +-----------+     |-+
+ |  v  |     &lt;----------      +-------------+ |       http        | | es client | App | |-+
+ |  e  |                        +-------------+      &lt;----&gt;       | +-----------+     | | |-+
+ |  n  |                                                          +-------------------+ | | |-+
+ |  t  |    http (on boot)    +------------+                        +-------------------+ | | |
+ |     |   &lt;--------------&gt;   | es queries |-+        http            +-------------------+ | |
+ |  s  |      messaging       +------------+ |-+     &lt;----&gt;             +-------------------+ |
+ |  t  |     ----------&gt;        +------------+ |                          +-------------------+
+ |  o  |                          +------------+
+ |  r  |
+ |  e  |
+ +-----+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -517,6 +525,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p><a href="https://daggerok.github.io/es">GitHub pages</a></p>
 </li>
+<li>
+<p><a href="https://www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8" class="bare">www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -524,8 +535,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.1<br>
-Last updated 2018-12-07 12:32:16 UTC
+Version 1.0.0-SNAPSHOT<br>
+Last updated 2018-12-07 22:45:22 UTC
 </div>
 </div>
 <!-- jquery -->

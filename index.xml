@@ -2,8 +2,8 @@
 <?asciidoc-toc maxdepth="4"?>
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
-<title>es (0.0.1)</title>
-<date>2018-12-07 12:32:16 UTC</date>
+<title>es (1.0.0-SNAPSHOT)</title>
+<date>2018-12-07 22:45:22 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -14,28 +14,34 @@
 <authorinitials>MK</authorinitials>
 <revhistory>
 <revision>
-<revnumber>0.0.1</revnumber>
-<date>2018-12-07 12:32:16 UTC</date>
+<revnumber>1.0.0-SNAPSHOT</revnumber>
+<date>2018-12-07 22:45:22 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
 </info>
-<chapter xml:id="introduction">
-<title>Introduction</title>
-<formalpara>
-<title>build</title>
-<para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw clean package docker-compose:up -P docker
-./mvnw docker-compose:down -P docker
-
-./gradlew clean build composeUp
-./gradlew composeDown</programlisting>
-</para>
-</formalpara>
-</chapter>
-<chapter xml:id="implementation">
-<title>Implementation</title>
-<simpara>TODO: implement documentation&#8230;&#8203;</simpara>
+<preface>
+<title></title>
+<simpara>Read <link xl:href="https://daggerok.github.io/es">project reference documentation</link></simpara>
+</preface>
+<chapter xml:id="es-system">
+<title>es system</title>
+<screen> +-----+
+ |  e  |
+ |  s  |
+ |     |                      +-------------+       messaging     +-------------------+
+ |  e  |      messaging       | es commands |-+    &lt;----------    | +-----------+     |-+
+ |  v  |     &lt;----------      +-------------+ |       http        | | es client | App | |-+
+ |  e  |                        +-------------+      &lt;----&gt;       | +-----------+     | | |-+
+ |  n  |                                                          +-------------------+ | | |-+
+ |  t  |    http (on boot)    +------------+                        +-------------------+ | | |
+ |     |   &lt;--------------&gt;   | es queries |-+        http            +-------------------+ | |
+ |  s  |      messaging       +------------+ |-+     &lt;----&gt;             +-------------------+ |
+ |  t  |     ----------&gt;        +------------+ |                          +-------------------+
+ |  o  |                          +------------+
+ |  r  |
+ |  e  |
+ +-----+</screen>
 </chapter>
 <chapter xml:id="links">
 <title>Links</title>
@@ -45,6 +51,9 @@
 </listitem>
 <listitem>
 <simpara><link xl:href="https://daggerok.github.io/es">GitHub pages</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8">www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8</link></simpara>
 </listitem>
 </itemizedlist>
 </chapter>
