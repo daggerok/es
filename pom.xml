@@ -11,6 +11,7 @@
 
   <modules>
     <module>client</module>
+    <module>bom</module>
   </modules>
 
   <properties>
@@ -58,7 +59,7 @@
   </dependencies>
 
   <build>
-    <defaultGoal>clean install</defaultGoal>
+    <defaultGoal>clean install deploy</defaultGoal>
 
     <plugins>
       <plugin>

@@ -1,0 +1,4 @@
+dependencies {
+  implementation platform("com.github.daggerok.es:client:$rootProject.version")
+  //implementation platform(project(':client'))
+}

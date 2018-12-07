@@ -35,10 +35,12 @@ wrapper {
   distributionType = Wrapper.DistributionType.BIN
 }
 
-apply plugin: 'base'
-version = '0.0.1-SNAPSHOT'
-group = 'com.github.daggerok.es'
-defaultTasks 'clean', 'build'
+allprojects {
+  apply plugin: 'base'
+  version = '1.0.0-SNAPSHOT'
+  group = 'com.github.daggerok.es'
+  defaultTasks 'clean', 'install', 'build'
+}
 
 apply plugin: 'idea'
 idea {
@@ -76,9 +78,8 @@ allprojects {
 }
 
 allprojects {
-  apply plugin: 'base'
-  apply plugin: 'maven'
   apply plugin: 'java'
+  apply plugin: 'maven'
   sourceCompatibility = targetCompatibility = "$javaVersion"
   apply plugin: 'io.franzbecker.gradle-lombok'
   lombok.version = project.lombokVersion
@@ -301,3 +302,106 @@ if (project.hasProperty('scan')) {
     tag System.getProperty('os.name', 'unknown')
   }
 }
+
+allprojects {
+  apply plugin: 'java'
+
+  project.javadoc.failOnError = false
+
+  task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier 'sources'
+  }
+
+  task javadocJar(type: Jar) {
+    from javadoc
+    classifier 'javadoc'
+  }
+
+  apply plugin: 'maven-publish'
+
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        afterEvaluate {
+          from components.java
+          artifact sourcesJar
+          artifact javadocJar
+          //artifactId = jar.baseName
+
+          pom {
+            name = project.name
+            description = project.description
+            url = "https://github.com/daggerok/$project.name" as String
+            licenses {
+              license {
+                name = 'MIT License'
+                url = "https://github.com/daggerok/${project.name}/blob/master/LICENSE" as String
+              }
+            }
+            developers {
+              developer {
+                id = 'daggerok'
+                name = 'Maksim Kostromin'
+                email = 'daggerok@gmail.com'
+              }
+            }
+            scm {
+              connection = "scm:git:git://github.com/daggeropk/${project.name}.git" as String
+              developerConnection = "scm:git:ssh://github.com/daggeropk/${project.name}.git" as String
+              url = "http://github.com/daggeropk/$project.name" as String
+            }
+          }
+        }
+      }
+    }
+  }
+
+  publishing {
+    repositories {
+      maven {
+        url """$rootProject.buildDir/maven-publish/repos/${(
+            project.version.endsWith('SNAPSHOT') ? 'snapshots' : 'releases'
+        )}"""
+      }
+    }
+  }
+
+  publish.dependsOn assemble
+
+  /* // This one is required signatory to be configured (gpg stuff...)
+  apply plugin: 'signing'
+
+  signing {
+    sign project.publishing.publications.mavenJava
+  }
+  */
+}
+
+/*
+allprojects {
+  // with shadow plugin
+  publishing {
+    publications {
+      mavenJava(MavenPublication) { publication ->
+        afterEvaluate {
+          project.shadow.component(publication)
+          artifact sourcesJar
+          artifact javadocJar
+          // ...
+        }
+      }
+    }
+  }
+  // without shadow plugin
+  publishing {
+    publications {
+      mavenJava(MavenPublication) ->
+        artifact sourcesJar
+        artifact javadocJar
+      }
+    }
+  }
+  // ...
+}
+*/
