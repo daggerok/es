@@ -1,23 +1,28 @@
 = es image:https://travis-ci.org/daggerok/es.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/es"]
 
-////
-image:https://travis-ci.org/daggerok/es.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/es"]
-image:https://gitlab.com/daggerok/es/badges/master/build.svg["Build Status", link="https://gitlab.com/daggerok/es/-/jobs"]
-image:https://img.shields.io/bitbucket/pipelines/daggerok/es.svg["Build Status", link="https://bitbucket.com/daggerok/es"]
-////
-
 //tag::content[]
 
-//Read link:https://daggerok.github.io/es[project reference documentation]
+Read link:https://daggerok.github.io/es[project reference documentation]
 
-.build
-[source,bash]
+== es system
+
 ----
-./mvnw clean package docker-compose:up -P docker
-./mvnw docker-compose:down -P docker
-
-./gradlew clean build composeUp
-./gradlew composeDown
+ +-----+
+ |  e  |
+ |  s  |
+ |     |                      +-------------+       messaging     +-------------------+
+ |  e  |      messaging       | es commands |-+    <----------    | +-----------+     |-+
+ |  v  |     <----------      +-------------+ |       http        | | es client | App | |-+
+ |  e  |                        +-------------+      <---->       | +-----------+     | | |-+
+ |  n  |                                                          +-------------------+ | | |-+
+ |  t  |    http (on boot)    +------------+                        +-------------------+ | | |
+ |     |   <-------------->   | es queries |-+        http            +-------------------+ | |
+ |  s  |      messaging       +------------+ |-+     <---->             +-------------------+ |
+ |  t  |     ---------->        +------------+ |                          +-------------------+
+ |  o  |                          +------------+
+ |  r  |
+ |  e  |
+ +-----+
 ----
 
 //end::content[]

@@ -1,2 +1,3 @@
 rootProject.name = 'es'
-include 'docs'
+include ':docs'
+include ':client'

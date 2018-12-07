@@ -3,20 +3,17 @@ buildscript {
     javaVersion = '1.8'
     vavrVersion = '0.9.2'
     slf4jVersion = '1.7.25'
-    kotlinVersion = '1.3.10'
     jgivenVersion = '0.15.3'
     logbackVersion = '1.2.3'
     lombokVersion = '1.18.4'
     junitJupiterVersion = '5.3.1'
     junitPlatformVersion = '1.3.0'
-    springBootVersion = '2.1.0.RELEASE'
-    springCloudVersion = '2.0.2.RELEASE'
     assertjVersion = '3.11.1'
     hamcrestVersion = '1.3'
     junit4Version = '4.12'
 
-    adocProcessingOutputDir = project.file("$buildDir/asciidoc")
-    adocOutputDir = project.file("$rootDir/target/generated-docs")
+    adocProcessingOutputDir = project.file("$buildDir/asciidoc" as String)
+    adocOutputDir = project.file("$rootDir/target/generated-docs" as String)
   }
 
   dependencies {
@@ -31,10 +28,6 @@ plugins {
   id 'org.asciidoctor.convert' version '1.5.8.1' apply false
   id 'org.ajoberstar.git-publish' version '2.0.0-rc.2' apply false
   id 'io.franzbecker.gradle-lombok' version '1.14' apply false
-  id 'cn.bestwu.propdeps-eclipse' version '0.0.10' apply false
-  id 'cn.bestwu.propdeps-maven' version '0.0.10' apply false
-  id 'cn.bestwu.propdeps-idea' version '0.0.10' apply false
-  id 'cn.bestwu.propdeps' version '0.0.10' apply false
 }
 
 wrapper {
@@ -42,16 +35,20 @@ wrapper {
   distributionType = Wrapper.DistributionType.BIN
 }
 
+apply plugin: 'base'
+version = '0.0.1-SNAPSHOT'
+group = 'com.github.daggerok.es'
+defaultTasks 'clean', 'build'
+
 apply plugin: 'idea'
-//allprojects*.apply plugin: 'cn.bestwu.propdeps-idea'
 idea {
   module {
     downloadJavadoc = false
     downloadSources = true
   }
 }
+
 apply plugin: 'eclipse'
-//allprojects*.apply plugin: 'cn.bestwu.propdeps-eclipse'
 eclipse {
   classpath {
     downloadJavadoc = false
@@ -66,44 +63,40 @@ allprojects {
         project.buildDir,
         project.file('out'),
         project.file('build'),
-        project.file('public'),
+        adocOutputDir,
     ].each { delete it }
   }
 }
 
-String gradleDir = "$rootDir/gradle"
 allprojects {
   buildscript {
-    apply from: "$gradleDir/repositories-config.gradle"
+    apply from: "$rootDir/gradle/repositories-config.gradle"
   }
-  apply from: "$gradleDir/repositories-config.gradle"
+  apply from: "$rootDir/gradle/repositories-config.gradle"
 }
 
 allprojects {
   apply plugin: 'base'
   apply plugin: 'maven'
-  version = '0.0.1'
-  group = 'com.github.daggerok'
-  defaultTasks 'clean', 'build'
   apply plugin: 'java'
   sourceCompatibility = targetCompatibility = "$javaVersion"
   apply plugin: 'io.franzbecker.gradle-lombok'
   lombok.version = project.lombokVersion
   dependencies {
     // In java we trust...
-    compile "io.vavr:vavr:$vavrVersion"
-    compile "org.slf4j:slf4j-api:$slf4jVersion"
-    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "io.vavr:vavr:$vavrVersion"  as String
+    compile "org.slf4j:slf4j-api:$slf4jVersion" as String
+    compile "ch.qos.logback:logback-classic:$logbackVersion" as String
   }
 }
 
 allprojects {
   dependencies {
-    testImplementation "junit:junit:$junit4Version"
-    testImplementation "org.assertj:assertj-core:$assertjVersion"
-    testImplementation "org.hamcrest:hamcrest-core:$hamcrestVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+    testImplementation "junit:junit:$junit4Version" as String
+    testImplementation "org.assertj:assertj-core:$assertjVersion" as String
+    testImplementation "org.hamcrest:hamcrest-core:$hamcrestVersion" as String
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion" as String
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion" as String
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junitJupiterVersion", {
       because 'allows JUnit 3 and JUnit 4 tests to run'
     }
@@ -130,7 +123,7 @@ allprojects {
     }
   }
   findbugs {
-    reportsDir = file("$rootProject.buildDir/findbugs")
+    reportsDir = file("$rootProject.buildDir/findbugs" as String)
     ignoreFailures = true
   }
 }
@@ -174,7 +167,7 @@ subprojects {
       xml.enabled = false
       csv.enabled = false
       html.enabled = true
-      html.destination file("$buildDir/jacoco/html")
+      html.destination file("$buildDir/jacoco/html" as String)
     }
   }
 }
@@ -201,7 +194,7 @@ jacocoTestReport {
     xml.enabled = false
     csv.enabled = false
     html.enabled = true
-    html.destination file("$rootProject.buildDir/jacoco/html")
+    html.destination file("$rootProject.buildDir/jacoco/html" as String)
   }
   onlyIf = {
     true
@@ -213,11 +206,11 @@ jacocoTestReport {
   }
 }
 
-def dockerComposeFile = project.file("$rootDir/docker-compose-gradle.yaml")
+def dockerComposeFile = project.file("$rootDir/docker-compose-gradle.yaml" as String)
 if (project.hasProperty('profile')) {
   def profile = project.property('profile') ?: ''
   if (!profile.trim().isEmpty()) {
-    def path = dockerComposeFile.absolutePath.replace('-gradle.yaml', "-${profile}.yaml")
+    def path = dockerComposeFile.absolutePath.replace('-gradle.yaml', "-${profile}.yaml" as String)
     dockerComposeFile = project.file(path)
   }
 }
@@ -241,7 +234,7 @@ composeUp.shouldRunAfter clean, assemble
 apply plugin: 'org.asciidoctor.convert'
 apply plugin: 'org.ajoberstar.git-publish'
 asciidoctor {
-  sourceDir = project.file("$rootDir/docs")
+  sourceDir = project.file("$rootDir/docs" as String)
   sources {
     include 'index.adoc'
   }
@@ -272,14 +265,14 @@ asciidoctor {
 }
 asciidoctor.doLast {
   def html5 = "$adocProcessingOutputDir/html5"
-  project.file("$html5/404.html").text = project.file("$html5/index.html").text
-  project.file("$html5/.nojekyll").text = ''
+  project.file("$html5/404.html" as String).text = project.file("$html5/index.html" as String).text
+  project.file("$html5/.nojekyll" as String).text = ''
 }
 task documentation(type: Copy, dependsOn: asciidoctor) {
   shouldRunAfter clean, asciidoctor
-  from "$asciidoctor.outputDir/html5"
-  from "$asciidoctor.outputDir/pdf"
-  from "$asciidoctor.sourceDir/static", {
+  from("$asciidoctor.outputDir/html5" as String)
+  from("$asciidoctor.outputDir/pdf" as String)
+  from("$asciidoctor.sourceDir/static" as String) {
     into '.'
   }
   into adocOutputDir
