@@ -8,7 +8,7 @@
   <description>EventStore related libs and apps</description>
   <url>https://github.com/daggerok/es</url>
   <groupId>com.github.daggerok.es</groupId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <artifactId>es</artifactId>
   <packaging>pom</packaging>
 

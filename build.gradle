@@ -37,7 +37,7 @@ wrapper {
 
 allprojects {
   apply plugin: 'base'
-  version = '0.0.1-SNAPSHOT'
+  version = '0.0.2-SNAPSHOT'
   group = 'com.github.daggerok.es'
   defaultTasks 'clean', 'install', 'build', 'publish', 'documentation'
 }
