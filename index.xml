@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>es (1.0.0-SNAPSHOT)</title>
-<date>2018-12-08 01:45:13 UTC</date>
+<date>2018-12-08 01:48:59 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>1.0.0-SNAPSHOT</revnumber>
-<date>2018-12-08 01:45:13 UTC</date>
+<date>2018-12-08 01:48:59 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -84,6 +84,9 @@
 </listitem>
 <listitem>
 <simpara><link xl:href="https://www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8">www.slideshare.net/JontheBeach/event-sourcing-in-less-than-20-minutes-with-akka-and-java-8</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://www.programcreek.com/java-api-examples/?class=redis.clients.jedis.Pipeline&amp;method=sync">Jedis examples</link></simpara>
 </listitem>
 </itemizedlist>
 </chapter>
