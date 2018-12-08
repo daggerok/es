@@ -15,18 +15,50 @@ jdk: oraclejdk8
 addons:
   apt:
     packages:
+    - gpg
     - bash
 #    - curl
 #    - docker-ce
 
 install: true
-before_install:
+#before_install:
 #- sudo apt-get update -yqq >/dev/null
 #- sudo apt-get install -yqq --no-install-suggests --no-install-recommends
 #  tree jq python-pip curl bash sudo >/dev/null
 #- sudo pip install docker-compose httpie >/dev/null 2>&1
 #- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 #- stop_any 8080 3000 80 >/dev/null
+
+before_script:
+  - mkdir -p ${HOME}/.m2
+  - echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"                      ' >  ${HOME}/.m2/settings.xml
+  - echo '          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               ' >> ${HOME}/.m2/settings.xml
+  - echo '          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0          ' >> ${HOME}/.m2/settings.xml
+  - echo '                              http://maven.apache.org/xsd/settings-1.0.0.xsd">' >> ${HOME}/.m2/settings.xml
+  - echo '  <activeProfiles>                                                            ' >> ${HOME}/.m2/settings.xml
+  - echo '     <activeProfile>default</activeProfile>                                   ' >> ${HOME}/.m2/settings.xml
+  - echo '  </activeProfiles>                                                           ' >> ${HOME}/.m2/settings.xml
+  - echo '  <profiles>                                                                  ' >> ${HOME}/.m2/settings.xml
+  - echo '    <profile>                                                                 ' >> ${HOME}/.m2/settings.xml
+  - echo '      <id>ossrh</id>                                                          ' >> ${HOME}/.m2/settings.xml
+  - echo '      <properties>                                                            ' >> ${HOME}/.m2/settings.xml
+  - echo '        <gpg.executable>gpg</gpg.executable>                                  ' >> ${HOME}/.m2/settings.xml
+  - echo "        <gpg.passphrase>${GPG_PASSWORD}</gpg.passphrase>                      " >> ${HOME}/.m2/settings.xml
+  - echo '      </properties>                                                           ' >> ${HOME}/.m2/settings.xml
+  - echo '      <activation>                                                            ' >> ${HOME}/.m2/settings.xml
+  - echo '        <activeByDefault>true</activeByDefault>                               ' >> ${HOME}/.m2/settings.xml
+  - echo '      </activation>                                                           ' >> ${HOME}/.m2/settings.xml
+  - echo '    </profile>                                                                ' >> ${HOME}/.m2/settings.xml
+  - echo '  </profiles>                                                                 ' >> ${HOME}/.m2/settings.xml
+  - echo '  <servers>                                                                   ' >> ${HOME}/.m2/settings.xml
+  - echo '    <server>                                                                  ' >> ${HOME}/.m2/settings.xml
+  - echo '      <id>ossrh</id>                                                          ' >> ${HOME}/.m2/settings.xml
+  - echo '      <username>daggerok</username>                                           ' >> ${HOME}/.m2/settings.xml
+  - echo "      <password>${SONATYPE_PASSWORD}</password>                               " >> ${HOME}/.m2/settings.xml
+  - echo '    </server>                                                                 ' >> ${HOME}/.m2/settings.xml
+  - echo '  </servers>                                                                  ' >> ${HOME}/.m2/settings.xml
+  - echo '</settings>                                                                   ' >> ${HOME}/.m2/settings.xml
+  - ./mvnw
 
 script:
 - export root=$(pwd)

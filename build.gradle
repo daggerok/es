@@ -37,7 +37,6 @@ wrapper {
 
 allprojects {
   apply plugin: 'base'
-  version = '0.0.2-SNAPSHOT'
   group = 'com.github.daggerok.es'
   defaultTasks 'clean', 'install', 'build', 'publish', 'documentation'
 }
@@ -381,7 +380,7 @@ allprojects {
   publishing {
     repositories {
       maven {
-        url """$rootProject.buildDir/maven-publish/repos/${(
+        url """$rootProject.buildDir/repo/${(
             project.version.endsWith('SNAPSHOT') ? 'snapshots' : 'releases'
         )}"""
       }

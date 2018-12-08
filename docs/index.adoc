@@ -18,6 +18,7 @@ Maksim Kostromin <daggerok@gmail.com>
 :source-highlighter: highlightjs
 
 include::../README.adoc[tags=content]
+include::../JCENTER.adoc[]
 include::../MAVEN_CENTRAL.adoc[]
 
 == Links

@@ -1,5 +1,7 @@
 
-== deploy snapshot
+== Maven central
+
+=== deploy snapshot
 
 requires:
 
@@ -14,7 +16,7 @@ requires:
 ./mvnw clean depploy
 ----
 
-== deploy release
+=== deploy release
 
 [source,bash]
 ----

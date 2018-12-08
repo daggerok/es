@@ -1,0 +1,10 @@
+
+== JCenter
+
+=== deploy locally into ./build/repo
+
+.bash
+[source,bash]
+----
+./gradlew clean publish
+----
