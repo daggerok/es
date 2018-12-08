@@ -1,0 +1,23 @@
+
+== deploy snapshot
+
+requires:
+
+. setup gpg (gpg2)
+. generate key
+. send key to server
+. setup settings.xml accordingly to maven central OSSRH instructions
+
+.bash
+[source,bash]
+----
+./mvnw clean depploy
+----
+
+== deploy release
+
+[source,bash]
+----
+./mvnw versions:set -DgenerateBackupPoms=false -DnewVersion=x.y.z
+./mvnw clean deploy -P release
+----
