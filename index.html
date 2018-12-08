@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.7.1">
 <meta name="author" content="Maksim Kostromin">
-<title>es (1.0.0-SNAPSHOT)</title>
+<title>es (0.0.4-SNAPSHOT)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -463,18 +463,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>es (1.0.0-SNAPSHOT) <span class="image"><a class="image" href="https://github.com/daggerok/es"><img src="https://travis-ci.org/daggerok/es.svg?branch=master" alt="Build Status"></a></span></h1>
+<h1>es (0.0.4-SNAPSHOT) <span class="image"><a class="image" href="https://github.com/daggerok/es"><img src="https://travis-ci.org/daggerok/es.svg?branch=master" alt="Build Status"></a></span></h1>
 <div class="details">
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
-<span id="revnumber">version 1.0.0-SNAPSHOT,</span>
-<span id="revdate">2018-12-08 01:51:41 UTC</span>
+<span id="revnumber">version 0.0.4-SNAPSHOT,</span>
+<span id="revdate">2018-12-08 05:03:16 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#es-system">es system</a></li>
 <li><a href="#todo">TODO</a></li>
+<li><a href="#jcenter">JCenter</a>
+<ul class="sectlevel2">
+<li><a href="#deploy-locally-into-buildrepo">deploy locally into ./build/repo</a></li>
+</ul>
+</li>
+<li><a href="#maven-central">Maven central</a>
+<ul class="sectlevel2">
+<li><a href="#deploy-snapshot">deploy snapshot</a></li>
+<li><a href="#deploy-release">deploy release</a></li>
+</ul>
+</li>
 <li><a href="#links">Links</a></li>
 </ul>
 </div>
@@ -551,6 +562,62 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="jcenter"><a class="anchor" href="#jcenter"></a>JCenter</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="deploy-locally-into-buildrepo"><a class="anchor" href="#deploy-locally-into-buildrepo"></a>deploy locally into ./build/repo</h3>
+<div class="listingblock">
+<div class="title">bash</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./gradlew clean publish</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="maven-central"><a class="anchor" href="#maven-central"></a>Maven central</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="deploy-snapshot"><a class="anchor" href="#deploy-snapshot"></a>deploy snapshot</h3>
+<div class="paragraph">
+<p>requires:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>setup gpg (gpg2)</p>
+</li>
+<li>
+<p>generate key</p>
+</li>
+<li>
+<p>send key to server</p>
+</li>
+<li>
+<p>setup settings.xml accordingly to maven central OSSRH instructions</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">bash</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pgpg clean depploy</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deploy-release"><a class="anchor" href="#deploy-release"></a>deploy release</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pgpg versions:set -DgenerateBackupPoms=false -DnewVersion=x.y.z
+./mvnw -Pgpg clean deploy -P release</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="links"><a class="anchor" href="#links"></a>Links</h2>
 <div class="sectionbody">
 <div class="ulist">
@@ -577,8 +644,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.0-SNAPSHOT<br>
-Last updated 2018-12-08 01:51:41 UTC
+Version 0.0.4-SNAPSHOT<br>
+Last updated 2018-12-08 05:03:16 UTC
 </div>
 </div>
 <!-- jquery -->

@@ -2,8 +2,8 @@
 <?asciidoc-toc maxdepth="4"?>
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
-<title>es (1.0.0-SNAPSHOT)</title>
-<date>2018-12-08 01:51:41 UTC</date>
+<title>es (0.0.4-SNAPSHOT)</title>
+<date>2018-12-08 05:03:16 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -14,8 +14,8 @@
 <authorinitials>MK</authorinitials>
 <revhistory>
 <revision>
-<revnumber>1.0.0-SNAPSHOT</revnumber>
-<date>2018-12-08 01:51:41 UTC</date>
+<revnumber>0.0.4-SNAPSHOT</revnumber>
+<date>2018-12-08 05:03:16 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -72,6 +72,50 @@
 <programlisting language="bash" linenumbering="unnumbered">./gradlew clean publish build documentation ; ./mvnw clean deploy install -Pdocs</programlisting>
 </para>
 </formalpara>
+</chapter>
+<chapter xml:id="jcenter">
+<title>JCenter</title>
+<section xml:id="deploy-locally-into-buildrepo">
+<title>deploy locally into ./build/repo</title>
+<formalpara>
+<title>bash</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./gradlew clean publish</programlisting>
+</para>
+</formalpara>
+</section>
+</chapter>
+<chapter xml:id="maven-central">
+<title>Maven central</title>
+<section xml:id="deploy-snapshot">
+<title>deploy snapshot</title>
+<simpara>requires:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>setup gpg (gpg2)</simpara>
+</listitem>
+<listitem>
+<simpara>generate key</simpara>
+</listitem>
+<listitem>
+<simpara>send key to server</simpara>
+</listitem>
+<listitem>
+<simpara>setup settings.xml accordingly to maven central OSSRH instructions</simpara>
+</listitem>
+</orderedlist>
+<formalpara>
+<title>bash</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgpg clean depploy</programlisting>
+</para>
+</formalpara>
+</section>
+<section xml:id="deploy-release">
+<title>deploy release</title>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgpg versions:set -DgenerateBackupPoms=false -DnewVersion=x.y.z
+./mvnw -Pgpg clean deploy -P release</programlisting>
+</section>
 </chapter>
 <chapter xml:id="links">
 <title>Links</title>
