@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>es (1.0.0-SNAPSHOT)</title>
-<date>2018-12-08 01:23:42 UTC</date>
+<date>2018-12-08 01:45:13 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>1.0.0-SNAPSHOT</revnumber>
-<date>2018-12-08 01:23:42 UTC</date>
+<date>2018-12-08 01:45:13 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -42,6 +42,30 @@
  |  r  |
  |  e  |
  +-----+</screen>
+</chapter>
+<chapter xml:id="todo">
+<title>TODO</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Implement es-event-store: First implementation could be: <literal>event-store-postgresql</literal> or <literal>event-store-h2</literal></simpara>
+<itemizedlist>
+<listitem>
+<simpara>for beginning could be just enough to use:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>http post for commands</simpara>
+</listitem>
+<listitem>
+<simpara>http get for queries right out from the event-store (inefficient)</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>&#8230;&#8203;</simpara>
+</listitem>
+</orderedlist>
 <formalpara>
 <title>build</title>
 <para>
