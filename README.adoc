@@ -36,7 +36,7 @@ Read link:https://daggerok.github.io/es[project reference documentation]
 .build
 [source,bash]
 ----
-./gradlew ; ./mvnw -Pdocs
+./gradlew clean publish build documentation ; ./mvnw clean deploy install -Pdocs
 ----
 
 //end::content[]
