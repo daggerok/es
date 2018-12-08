@@ -24,7 +24,8 @@
     <jgiven.version>0.16.1</jgiven.version>
     <vavr.version>0.9.2</vavr.version>
     <!-- only work properly when you have a .mvn folder at the root of your project. -->
-    <repo.dir>${maven.multiModuleProjectDirectory}/target/repo</repo.dir>
+    <!--<repo.dir>${maven.multiModuleProjectDirectory}/target/repo</repo.dir>-->
+    <repo.dir>${user.dir}/target/repo</repo.dir>
   </properties>
 
   <dependencyManagement>
