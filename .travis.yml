@@ -35,9 +35,6 @@ before_script:
   - echo '          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"               ' >> ${HOME}/.m2/settings.xml
   - echo '          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0          ' >> ${HOME}/.m2/settings.xml
   - echo '                              http://maven.apache.org/xsd/settings-1.0.0.xsd">' >> ${HOME}/.m2/settings.xml
-  - echo '  <activeProfiles>                                                            ' >> ${HOME}/.m2/settings.xml
-  - echo '     <activeProfile>default</activeProfile>                                   ' >> ${HOME}/.m2/settings.xml
-  - echo '  </activeProfiles>                                                           ' >> ${HOME}/.m2/settings.xml
   - echo '  <profiles>                                                                  ' >> ${HOME}/.m2/settings.xml
   - echo '    <profile>                                                                 ' >> ${HOME}/.m2/settings.xml
   - echo '      <id>ossrh</id>                                                          ' >> ${HOME}/.m2/settings.xml

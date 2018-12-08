@@ -13,13 +13,13 @@ requires:
 .bash
 [source,bash]
 ----
-./mvnw clean depploy
+./mvnw -Pgpg clean depploy
 ----
 
 === deploy release
 
 [source,bash]
 ----
-./mvnw versions:set -DgenerateBackupPoms=false -DnewVersion=x.y.z
-./mvnw clean deploy -P release
+./mvnw -Pgpg versions:set -DgenerateBackupPoms=false -DnewVersion=x.y.z
+./mvnw -Pgpg clean deploy -P release
 ----
