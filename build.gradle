@@ -39,19 +39,21 @@ allprojects {
   apply plugin: 'base'
   version = '1.0.0-SNAPSHOT'
   group = 'com.github.daggerok.es'
-  defaultTasks 'clean', 'install', 'build'
+  defaultTasks 'clean', 'install', 'build', 'publish', 'documentation'
 }
 
-//subprojects { project ->
-//  project.apply plugin: 'base'
-//  if (project.subprojects.size() == 0
-//      && !['bom', 'docs'].contains(project.name)) { // ignore ':bom' and ':docs' for now...
-//    project.group = "$project.parent.group.$project.parent.name"
-//  } 
-//  else {
-//    project.group = project.parent.group
-//  }
-//}
+/*
+subprojects { project ->
+  project.apply plugin: 'base'
+  if (project.subprojects.size() == 0
+      && !['bom', 'docs'].contains(project.name)) { // ignore ':bom' and ':docs' for now...
+    project.group = "$project.parent.group.$project.parent.name"
+  } 
+  else {
+    project.group = project.parent.group
+  }
+}
+*/
 
 apply plugin: 'idea'
 idea {

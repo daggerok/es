@@ -1,3 +1,0 @@
-subprojects {
-  project.group = "$project.parent.group.$project.parent.name"
-}
