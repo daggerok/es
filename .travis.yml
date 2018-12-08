@@ -55,12 +55,11 @@ before_script:
   - echo '    </server>                                                                 ' >> ${HOME}/.m2/settings.xml
   - echo '  </servers>                                                                  ' >> ${HOME}/.m2/settings.xml
   - echo '</settings>                                                                   ' >> ${HOME}/.m2/settings.xml
-  - ./mvnw
 
 script:
   - export root=$(pwd)
   - ./mvnw
-  - ./gradlew
+  - ./gradlew -Dorg.gradle.jvmargs='-Xmx1g'
 
 before_deploy:
   - cd ${root}
