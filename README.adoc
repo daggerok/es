@@ -25,6 +25,14 @@ Read link:https://daggerok.github.io/es[project reference documentation]
  +-----+
 ----
 
+== TODO
+
+. Implement es-event-store: First implementation could be: `event-store-postgresql` or `event-store-h2`
+  - for beginning could be just enough to use:
+    .. http post for commands
+    .. http get for queries right out from the event-store (inefficient)
+. ...
+
 .build
 [source,bash]
 ----
