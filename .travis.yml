@@ -61,9 +61,9 @@ before_script:
   - ./mvnw
 
 script:
-- export root=$(pwd)
-- ./mvnw >/dev/null
-- ./gradlew >/dev/null
+  - export root=$(pwd)
+  - ./mvnw
+  - ./gradlew
 
 before_deploy:
 - cd ${root}
