@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>es (1.0.0-SNAPSHOT)</title>
-<date>2018-12-08 01:48:59 UTC</date>
+<date>2018-12-08 01:51:41 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>1.0.0-SNAPSHOT</revnumber>
-<date>2018-12-08 01:48:59 UTC</date>
+<date>2018-12-08 01:51:41 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -69,7 +69,7 @@
 <formalpara>
 <title>build</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./gradlew ; ./mvnw -Pdocs</programlisting>
+<programlisting language="bash" linenumbering="unnumbered">./gradlew clean publish build documentation ; ./mvnw clean deploy install -Pdocs</programlisting>
 </para>
 </formalpara>
 </chapter>
