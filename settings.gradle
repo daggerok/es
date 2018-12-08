@@ -1,4 +1,5 @@
 rootProject.name = 'es'
 include ':bom'
-include ':client'
+include ':client:http'
+include ':client:redis'
 include ':docs'

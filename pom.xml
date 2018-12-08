@@ -10,8 +10,9 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>client</module>
-    <module>bom</module>
+    <module>./client/http</module>
+    <module>./client/redis</module>
+    <module>./bom</module>
   </modules>
 
   <properties>
@@ -22,6 +23,8 @@
     <assertj.version>3.11.1</assertj.version>
     <jgiven.version>0.16.1</jgiven.version>
     <vavr.version>0.9.2</vavr.version>
+    <!-- only work properly when you have a .mvn folder at the root of your project. -->
+    <repo.dir>${maven.multiModuleProjectDirectory}/target/repo</repo.dir>
   </properties>
 
   <dependencyManagement>
@@ -129,8 +132,8 @@
   <!-- deploy -->
   <distributionManagement>
     <repository>
-      <id>local-repo</id>
-      <url>file://${project.basedir}/target/local-repo</url>
+      <id>repo</id>
+      <url>file://${repo.dir}</url>
     </repository>
   </distributionManagement>
 

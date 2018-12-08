@@ -1,4 +1,8 @@
 dependencies {
-  implementation platform("com.github.daggerok.es:client:$rootProject.version")
+  implementation platform("com.github.daggerok.es:client:$rootProject.version" as String)
   //implementation platform(project(':client'))
+  implementation platform("com.github.daggerok.es.client:http:$rootProject.version" as String)
+  //implementation platform(project(':client:http'))
+  implementation platform("com.github.daggerok.es.client:redis:$rootProject.version" as String)
+  //implementation platform(project(':client:redis'))
 }

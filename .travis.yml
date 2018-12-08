@@ -30,17 +30,15 @@ before_install:
 
 script:
 - export root=$(pwd)
-- bash mvnw >/dev/null
-- bash gradlew >/dev/null
+- ./mvnw >/dev/null
+- ./gradlew >/dev/null
 
 before_deploy:
 - cd ${root}
 - ./gradlew documentation -Dorg.gradle.jvmargs='-Xmx1g'
-- ./gradlew clean
-#
 - ./mvnw -Pdocs
-- mkdir -p ./target/generated-docs
-- cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
+#- mkdir -p ./target/generated-docs
+#- cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
 
 deploy:
   provider: pages

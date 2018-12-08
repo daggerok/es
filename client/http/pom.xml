@@ -7,11 +7,12 @@
     <artifactId>es</artifactId>
     <groupId>com.github.daggerok.es</groupId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
+  <groupId>com.github.daggerok.es.client</groupId>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>client</artifactId>
+  <artifactId>http</artifactId>
   <packaging>pom</packaging>
 
 </project>

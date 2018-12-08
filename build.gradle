@@ -42,6 +42,17 @@ allprojects {
   defaultTasks 'clean', 'install', 'build'
 }
 
+//subprojects { project ->
+//  project.apply plugin: 'base'
+//  if (project.subprojects.size() == 0
+//      && !['bom', 'docs'].contains(project.name)) { // ignore ':bom' and ':docs' for now...
+//    project.group = "$project.parent.group.$project.parent.name"
+//  } 
+//  else {
+//    project.group = project.parent.group
+//  }
+//}
+
 apply plugin: 'idea'
 idea {
   module {
@@ -84,27 +95,35 @@ allprojects {
   apply plugin: 'io.franzbecker.gradle-lombok'
   lombok.version = project.lombokVersion
   dependencies {
+    implementation platform("io.vavr:vavr:$vavrVersion" as String)
+    implementation platform("org.slf4j:slf4j-api:$slf4jVersion" as String)
+    implementation platform("ch.qos.logback:logback-classic:$logbackVersion" as String)
+    testImplementation platform("junit:junit:$junit4Version" as String)
+    testImplementation platform("junit:junit:$junit4Version" as String)
+    testImplementation platform("org.assertj:assertj-core:$assertjVersion" as String)
+    testImplementation platform("org.hamcrest:hamcrest-core:$hamcrestVersion" as String)
+    testImplementation platform("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion" as String)
+    testImplementation platform("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion" as String)
+    testImplementation platform("org.junit.vintage:junit-vintage-engine:$junitJupiterVersion" as String)
+    testImplementation platform("org.junit.platform:junit-platform-launcher:$junitPlatformVersion" as String)
+    testImplementation platform('org.apiguardian:apiguardian-api:1.0.0')
     // In java we trust...
-    compile "io.vavr:vavr:$vavrVersion"  as String
-    compile "org.slf4j:slf4j-api:$slf4jVersion" as String
-    compile "ch.qos.logback:logback-classic:$logbackVersion" as String
+    compile 'io.vavr:vavr'
+    compile 'org.slf4j:slf4j-api'
+    compile 'ch.qos.logback:logback-classic'
   }
 }
 
 allprojects {
   dependencies {
-    testImplementation "junit:junit:$junit4Version" as String
-    testImplementation "org.assertj:assertj-core:$assertjVersion" as String
-    testImplementation "org.hamcrest:hamcrest-core:$hamcrestVersion" as String
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion" as String
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion" as String
-    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:$junitJupiterVersion", {
-      because 'allows JUnit 3 and JUnit 4 tests to run'
-    }
-    testRuntime "org.junit.platform:junit-platform-launcher:$junitPlatformVersion", {
-      because 'allows tests to run from IDEs that bundle older version of launcher'
-    }
-    testCompileOnly 'org.apiguardian:apiguardian-api:1.0.0'
+    testImplementation 'junit:junit'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.hamcrest:hamcrest-core'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
+    testRuntime 'org.junit.platform:junit-platform-launcher:'
+    testCompileOnly 'org.apiguardian:apiguardian-api'
   }
   test {
     useJUnitPlatform {
